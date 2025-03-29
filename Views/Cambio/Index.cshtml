@@ -1,0 +1,38 @@
+@model practica2025.Models.TransaccionModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Casa de Cambio";
+}
+
+<h2>Conversión de Moneda</h2>
+
+<form asp-action="Convertir" method="post">
+    <div>
+        <label>Cantidad:</label>
+        <input type="number" asp-for="Cantidad" required />
+    </div>
+
+    <div>
+        <label>De:</label>
+        <select asp-for="MonedaOrigen">
+            <option value="BRL">Real Brasileño (BRL)</option>
+            <option value="PEN">Sol Peruano (PEN)</option>
+        </select>
+    </div>
+
+    <div>
+        <label>A:</label>
+        <select asp-for="MonedaDestino">
+            <option value="PEN">Sol Peruano (PEN)</option>
+            <option value="BRL">Real Brasileño (BRL)</option>
+        </select>
+    </div>
+
+    <button type="submit">Convertir</button>
+</form>
+
+@if (Model != null && Model.Resultado > 0)
+{
+    <h3>Resultado: @Model.Cantidad @Model.MonedaOrigen → @Model.Resultado @Model.MonedaDestino</h3>
+}
